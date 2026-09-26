@@ -92,53 +92,55 @@ self.addEventListener("fetch", (event) => {
   // 版本标记文件永不拦截：页面靠它判断"线上是不是已经出新版了"
   if (url.pathname === "/version.json") return;
 
+  // 兜底铁律：SW 只是加速层，绝不能因为它自己的问题让页面打不开。
+  // 下面这个 .catch 会在任何意外（包括我们自己的代码 bug）时直接放行到网络。
+  event.respondWith(
+    handle(req, url.pathname.startsWith("/_next/static/"), (p) =>
+      event.waitUntil(p),
+    ).catch(() => fetch(event.request)),
+  );
+});
+
+async function handle(req, isAsset, keepAlive = () => {}) {
   // 带内容指纹的静态资源：文件名变了内容才是真的变了，放心一直用缓存
-  if (url.pathname.startsWith("/_next/static/")) {
-    event.respondWith(
-      (async () => {
-        const cache = await caches.open(ASSET_CACHE);
-        const hit = await cache.match(req);
-        if (hit) return hit;
-        const res = await fetch(req);
-        if (res.ok) cache.put(req, res.clone());
-        return res;
-      })(),
-    );
-    return;
+  if (isAsset) {
+    const cache = await caches.open(ASSET_CACHE);
+    const hit = await cache.match(req);
+    if (hit) return hit;
+    const res = await fetch(req);
+    if (res.ok) cache.put(req, res.clone());
+    return res;
   }
 
   // 页面 / RSC 预取 .txt / manifest / 图标：
-  // 网络优先，但最多等 NET_TIMEOUT 毫秒 —— 网络快就用最新的（发版后一次刷新即可生效），
+  // 网络优先，但最多等 NET_TIMEOUT 毫秒 —— 网络快就用最新的（发版后一次刷新即生效），
   // 网络慢（比如手机走国外线路）就立刻用缓存顶上，不让用户干等。
-  event.respondWith(
-    (async () => {
-      const cache = await caches.open(SHELL_CACHE);
-      const network = fetch(req)
-        .then((res) => {
-          if (res.ok) cache.put(req, res.clone());
-          return res;
-        })
-        .catch(() => undefined);
+  const cache = await caches.open(SHELL_CACHE);
+  const network = fetch(req)
+    .then((res) => {
+      if (res.ok) cache.put(req, res.clone());
+      return res;
+    })
+    .catch(() => undefined);
 
-      const cached = await cache.match(req) ||
-        (await cache.match(req, { ignoreSearch: true }));
+  const cached =
+    (await cache.match(req)) ||
+    (await cache.match(req, { ignoreSearch: true }));
 
-      if (cached) {
-        const winner = await Promise.race([
-          network,
-          new Promise((r) => setTimeout(() => r(undefined), NET_TIMEOUT_MS)),
-        ]);
-        // 网速快且结果正常 → 用最新的；超时/断网/服务端报错 → 缓存顶上
-        if (winner && winner.ok) return winner;
-        event.waitUntil(network);
-        return cached;
-      }
+  if (cached) {
+    const winner = await Promise.race([
+      network,
+      new Promise((r) => setTimeout(() => r(undefined), NET_TIMEOUT_MS)),
+    ]);
+    // 网速快且结果正常 → 用最新的；超时/断网/服务端报错 → 缓存顶上
+    if (winner && winner.ok) return winner;
+    keepAlive(network); // 让后台这次网络请求有时间把缓存更新掉
+    return cached;
+  }
 
-      const net = await network;
-      return net || offlineFallback(req);
-    })(),
-  );
-});
+  const net = await network;
+  return net || offlineFallback(req);
+}
 
 /* 从没打开过的页面在离线时才会走到这里 */
 function offlineFallback(req) {
