@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#8ED0FF"/>
+<stop offset="0.48" stop-color="#A78BFA"/>
+<stop offset="1" stop-color="#FFA5DB"/>
+</linearGradient>
+<linearGradient id="hair" x1="0" y1="0" x2="0.7" y2="1">
+<stop offset="0" stop-color="#C9B4FF"/>
+<stop offset="1" stop-color="#FFAFDF"/>
+</linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="#FFFFFF" stop-opacity="0.4"/>
+<stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="iris" cx="0.5" cy="0.62" r="0.72">
+<stop offset="0" stop-color="#C9AEFF"/>
+<stop offset="0.55" stop-color="#8B5CF6"/>
+<stop offset="1" stop-color="#3D2B8F"/>
+</radialGradient>
+<clipPath id="frame"><rect x="0" y="0" width="512" height="512" rx="115"/></clipPath>
+</defs>
+<g clip-path="url(#frame)">
+<rect x="0" y="0" width="512" height="512" rx="115" fill="url(#bg)"/>
+<circle cx="140" cy="118" r="200" fill="url(#glow)"/>
+<path d="M0 -22 Q3.5 -3.5 22 0 Q3.5 3.5 0 22 Q-3.5 3.5 -22 0 Q-3.5 -3.5 0 -22 Z" transform="translate(428 96) scale(1.05)" fill="#FFFFFF" opacity="0.95"/>
+<path d="M0 -22 Q3.5 -3.5 22 0 Q3.5 3.5 0 22 Q-3.5 3.5 -22 0 Q-3.5 -3.5 0 -22 Z" transform="translate(74 218) scale(0.62)" fill="#FFFFFF" opacity="0.8"/>
+<path d="M0 -22 Q3.5 -3.5 22 0 Q3.5 3.5 0 22 Q-3.5 3.5 -22 0 Q-3.5 -3.5 0 -22 Z" transform="translate(436 330) scale(0.8)" fill="#FFEB99" opacity="0.95"/>
+<circle cx="98" cy="148" r="5" fill="#FFFFFF" opacity="0.7"/>
+<circle cx="60" cy="396" r="4" fill="#FFFFFF" opacity="0.5"/>
+<circle cx="452" cy="236" r="4.5" fill="#FFEB99" opacity="0.8"/>
+<g transform="translate(0 10)">
+<!-- 后发 -->
+<circle cx="256" cy="268" r="150" fill="url(#hair)"/>
+<ellipse cx="122" cy="336" rx="34" ry="88" fill="url(#hair)"/>
+<ellipse cx="390" cy="336" rx="34" ry="88" fill="url(#hair)"/>
+<!-- 猫耳 -->
+<path d="M120 210 Q102 92 170 60 Q216 108 208 186 Z" fill="url(#hair)"/>
+<path d="M138 186 Q128 112 172 84 Q200 118 194 172 Z" fill="#FBC6E4"/>
+<path d="M392 210 Q410 92 342 60 Q296 108 304 186 Z" fill="url(#hair)"/>
+<path d="M374 186 Q384 112 340 84 Q312 118 318 172 Z" fill="#FBC6E4"/>
+<!-- 呆毛 -->
+<path d="M258 132 Q232 104 252 76 Q268 56 288 68" fill="none" stroke="#C9B4FF" stroke-width="13" stroke-linecap="round"/>
+<!-- 脸 -->
+<circle cx="256" cy="300" r="128" fill="#FFF8F1"/>
+<!-- 鬓发 -->
+<path d="M132 280 Q118 330 138 372 Q156 396 160 360 Q164 320 158 288 Z" fill="url(#hair)"/>
+<path d="M380 280 Q394 330 374 372 Q356 396 352 360 Q348 320 354 288 Z" fill="url(#hair)"/>
+<!-- 刘海（云朵边） -->
+<path d="M127 291 A130 130 0 0 1 385 291 Q361 334 336 296 Q310 334 284 296 Q258 334 232 296 Q206 334 180 296 Q152 332 127 291 Z" fill="url(#hair)"/>
+<!-- 眼睛 -->
+<ellipse cx="205" cy="350" rx="27" ry="35" fill="url(#iris)"/>
+<ellipse cx="307" cy="350" rx="27" ry="35" fill="url(#iris)"/>
+<path d="M174 336 Q205 296 236 336" fill="none" stroke="#2A1A5E" stroke-width="11" stroke-linecap="round"/>
+<path d="M276 336 Q307 296 338 336" fill="none" stroke="#2A1A5E" stroke-width="11" stroke-linecap="round"/>
+<ellipse cx="205" cy="372" rx="13" ry="7" fill="#D9C4FF" opacity="0.75"/>
+<ellipse cx="307" cy="372" rx="13" ry="7" fill="#D9C4FF" opacity="0.75"/>
+<circle cx="195" cy="338" r="10" fill="#FFFFFF"/>
+<circle cx="297" cy="338" r="10" fill="#FFFFFF"/>
+<circle cx="214" cy="366" r="4.5" fill="#FFFFFF" opacity="0.9"/>
+<circle cx="316" cy="366" r="4.5" fill="#FFFFFF" opacity="0.9"/>
+<!-- 鼻 / 腮红 / 嘴 -->
+<circle cx="256" cy="374" r="2.5" fill="#E8A08F" opacity="0.7"/>
+<ellipse cx="166" cy="384" rx="19" ry="11" fill="#FF9BC8" opacity="0.5"/>
+<ellipse cx="346" cy="384" rx="19" ry="11" fill="#FF9BC8" opacity="0.5"/>
+<path d="M244 388 Q256 406 268 388 Z" fill="#D4577F"/>
+<!-- 发饰 -->
+<path d="M0 -22 Q3.5 -3.5 22 0 Q3.5 3.5 0 22 Q-3.5 3.5 -22 0 Q-3.5 -3.5 0 -22 Z" transform="translate(376 128) scale(0.55)" fill="#FFD66B" opacity="1"/>
+<circle cx="346" cy="156" r="4.5" fill="#FFFFFF" opacity="0.9"/>
+</g>
+</g>
+</svg>

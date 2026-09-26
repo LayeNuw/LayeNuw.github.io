@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.layenuw",
+        "sha256_cert_fingerprints": ["F6:89:2A:CE:08:C8:1B:8D:A3:43:DD:0F:D2:F2:D0:17:83:2A:3A:D7:47:D4:D2:9C:4E:6E:A1:FB:20:8D:E5:41"]
+      }
+    }]
